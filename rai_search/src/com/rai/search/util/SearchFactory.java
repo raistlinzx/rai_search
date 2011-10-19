@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.wltea.analyzer.Lexeme;
@@ -40,6 +41,7 @@ public class SearchFactory {
 		
 		// insert doc
 		BasicDBObject _doc = new BasicDBObject("content", text);
+		_doc.put("create_time", new Date());
 		docColl.insert(_doc);
 
 		DBRef docRef = new DBRef(db, "document", _doc.get("_id"));
@@ -56,10 +58,13 @@ public class SearchFactory {
 				_word = new BasicDBObject();
 				_word.put("count", 1);
 				_word.put("key", key);
+				_word.put("create_time", new Date());
+				_word.put("update_time", new Date());
 				wordColl.insert(_word);
 			} else {
 				Integer count = (Integer) _word.get("count");
 				_word.put("count", count + 1);
+				_word.put("update_time", new Date());
 				wordColl.save(_word);
 			}
 

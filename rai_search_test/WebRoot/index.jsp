@@ -37,19 +37,14 @@
 </form>
 <%
 	if (result != null && result.size() > 0) {
-%>
-<table>
-	<%
 		for (DBObject o : result) {
 	%>
-	<tr>
-		<td><%=o.get("content")%></td>
-	</tr>
+	<div style="margin-bottom:10px;">
+		<div><%=o.get("content")%></div>
+		<div style="color:#093;"><%=o.get("create_time") %></div>
+	</div>
 	<%
 		}
-	%>
-</table>
-<%
 	}
 %>
 </body>
