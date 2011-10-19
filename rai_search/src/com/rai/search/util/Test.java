@@ -17,7 +17,7 @@ public class Test {
 			DBCollection word = db.getCollection("word");
 			DBCollection doc = db.getCollection("document");
 			DBCollection mapper = db.getCollection("word_mapper");
-			DBCollection temp = db.getCollection("temp");
+//			DBCollection temp = db.getCollection("temp");
 
 			long start = System.currentTimeMillis();
 			/** =================================== */

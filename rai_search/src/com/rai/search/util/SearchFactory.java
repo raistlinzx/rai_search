@@ -95,7 +95,7 @@ public class SearchFactory {
 			throws UnknownHostException, MongoException {
 		DB db = DBFactory.getInstance();
 		DBCollection wordColl = db.getCollection("word");
-		DBCollection docColl = db.getCollection("document");
+//		DBCollection docColl = db.getCollection("document");
 		DBCollection mapperColl = db.getCollection("word_mapper");
 
 		BasicDBObject query = new BasicDBObject();
@@ -126,15 +126,5 @@ public class SearchFactory {
 		mapperColl.drop();
 		docColl.drop();
 		wordColl.drop();
-	}
-
-	/**
-	 * 分词
-	 * 
-	 * @param text
-	 * @return
-	 */
-	public static String[] split(String text) {
-		return text.split(" ");
 	}
 }
