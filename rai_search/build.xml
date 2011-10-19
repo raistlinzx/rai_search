@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="package" basedir=".">
+	<property name="app.name" value="rai_search" />
+	<property name="compile.deprecation" value="false" />
+	<property name="compile.optimize" value="true" />
+
+	<property name="src.path" value="${basedir}/src" />
+	<property name="lib.path" value="${basedir}/lib" />
+	<property name="build.path" value="${basedir}/build" />
+	<property name="build.basepath" value="${basedir}/build/${app.name}" />
+	<property name="build.destfile" value="${basedir}/build/${app.name}.jar" />
+	<path id="build.lib.path">
+		<fileset id="build.lib" dir="${lib.path}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Clean build directory.. -->
+	<target name="clean">
+		<delete dir="${build.basepath}" />
+		<delete file="${build.destfile}" />
+		<echo>Clean build directory..</echo>
+	</target>
+
+	<!-- Prepare a empty build directory -->
+	<target name="prepare" depends="clean">
+		<mkdir dir="${build.path}" />
+		<mkdir dir="${build.basepath}" />
+		<echo>Prepare a empty build directory</echo>
+	</target>
+
+	<!-- Compile JAVA source files. -->
+	<target name="compile" depends="prepare">
+		<javac encoding="utf-8" srcdir="${src.path}" destdir="${build.basepath}" deprecation="${compile.deprecation}" optimize="${compile.optimize}" verbose="no" failonerror="false">
+			<classpath refid="build.lib.path" />
+		</javac>
+		<echo>Compile JAVA source files.</echo>		
+	</target>
+
+
+	<!-- Package -->
+	<target name="package" depends="compile">
+		<echo>Packaging</echo>
+		<jar destfile="${build.destfile}" basedir="${build.basepath}" />
+		<delete dir="${build.basepath}" />
+	</target>
+</project>
